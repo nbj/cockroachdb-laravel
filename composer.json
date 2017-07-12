@@ -9,5 +9,10 @@
             "email": "nbj@cego.dk"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Nbj\\": "src/"
+        }
+    }
 }
