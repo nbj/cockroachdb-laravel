@@ -3,9 +3,11 @@
 namespace Nbj\Cockroach;
 
 use Doctrine\DBAL\Driver\PDOPgSql\Driver as DoctrineDriver;
+use Nbj\Cockroach\Builder\CockroachBuilder;
 use Nbj\Cockroach\Grammar\Query\CockroachGrammar as QueryGrammar;
 use Nbj\Cockroach\Grammar\Schema\CockroachGrammar as SchemaGrammar;
 use Illuminate\Database\Connection;
+use Nbj\Cockroach\Processor\CockroachProcessor;
 
 class CockroachConnection extends Connection
 {
