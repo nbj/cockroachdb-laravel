@@ -1,0 +1,13 @@
+{
+    "name": "nbj/cockroachdb-laravel",
+    "description": "CockroachDB driver for Laravel 5.4",
+    "type": "package",
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "Nikolaj Boel Jensen",
+            "email": "nbj@cego.dk"
+        }
+    ],
+    "require": {}
+}
