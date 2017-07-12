@@ -2,6 +2,8 @@
 
 namespace Nbj\Cockroach\Builder;
 
+use Illuminate\Database\Schema\Builder;
+
 class CockroachBuilder extends Builder
 {
     /**
