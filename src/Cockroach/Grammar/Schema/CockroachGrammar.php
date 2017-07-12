@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cockroach\Schema;
+namespace Nbj\Cockroach\Grammar\Schema;
 
 use Illuminate\Support\Fluent;
 use Illuminate\Database\Schema\Blueprint;

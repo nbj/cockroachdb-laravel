@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cockroach;
+namespace Nbj\Cockroach;
 
 use Illuminate\Database\Connection;
 use Illuminate\Support\Facades\Config;

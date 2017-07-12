@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Cockroach;
+namespace Nbj\Cockroach\Builder;
 
 class CockroachBuilder extends Builder
 {

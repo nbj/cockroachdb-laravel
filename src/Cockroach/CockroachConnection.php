@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Cockroach;
+namespace Nbj\Cockroach;
 
 use Doctrine\DBAL\Driver\PDOPgSql\Driver as DoctrineDriver;
-use App\Cockroach\Query\CockroachGrammar as QueryGrammar;
-use App\Cockroach\Schema\CockroachGrammar as SchemaGrammar;
+use Nbj\Cockroach\Grammar\Query\CockroachGrammar as QueryGrammar;
+use Nbj\Cockroach\Grammar\Schema\CockroachGrammar as SchemaGrammar;
 use Illuminate\Database\Connection;
 
 class CockroachConnection extends Connection
