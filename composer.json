@@ -1,6 +1,7 @@
 {
     "name": "nbj/cockroachdb-laravel",
     "description": "CockroachDB driver for Laravel 5.4",
+    "keywords": ["cockroach", "cockroachdb", "laravel"],
     "type": "package",
     "license": "GNU",
     "authors": [
@@ -14,5 +15,7 @@
         "psr-4": {
             "Nbj\\": "src/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
