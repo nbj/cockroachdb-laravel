@@ -2,9 +2,9 @@
 
 namespace Nbj\Cockroach;
 
+use PDO;
 use Illuminate\Database\Connectors\Connector;
 use Illuminate\Database\Connectors\ConnectorInterface;
-use PDO;
 
 class CockroachConnector extends Connector implements ConnectorInterface
 {

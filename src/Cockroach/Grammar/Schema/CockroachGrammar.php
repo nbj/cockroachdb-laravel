@@ -2,9 +2,9 @@
 
 namespace Nbj\Cockroach\Grammar\Schema;
 
-use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Support\Fluent;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Grammars\Grammar;
 
 class CockroachGrammar extends Grammar
 {
@@ -138,6 +138,28 @@ class CockroachGrammar extends Grammar
     public function compileDrop(Blueprint $blueprint, Fluent $command)
     {
         return 'drop table '.$this->wrapTable($blueprint);
+    }
+
+    /**
+     * Compile the SQL needed to drop all tables.
+     *
+     * @param  string  $tables
+     * @return string
+     */
+    public function compileDropAllTables($tables)
+    {
+        return 'drop table "'.implode('","', $tables).'" cascade';
+    }
+
+    /**
+     * Compile the SQL needed to retrieve all table names.
+     *
+     * @param  string  $schema
+     * @return string
+     */
+    public function compileGetAllTables($schema)
+    {
+        return "select tablename from pg_catalog.pg_tables where schemaname = '{$schema}'";
     }
 
     /**

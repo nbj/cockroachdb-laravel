@@ -26,4 +26,40 @@ class CockroachBuilder extends Builder
                 $this->grammar->compileTableExists(), [$schema, $table]
             )) > 0;
     }
+
+    /**
+     * Drop all tables from the database.
+     *
+     * @return void
+     */
+    public function dropAllTables()
+    {
+        $tables = [];
+
+        foreach ($this->getAllTables() as $row) {
+            $row = (array) $row;
+
+            $tables[] = reset($row);
+        }
+
+        if (empty($tables)) {
+            return;
+        }
+
+        $this->connection->statement(
+            $this->grammar->compileDropAllTables($tables)
+        );
+    }
+
+    /**
+     * Get all of the table names for the database.
+     *
+     * @return array
+     */
+    protected function getAllTables()
+    {
+        return $this->connection->select(
+            $this->grammar->compileGetAllTables($this->connection->getConfig('schema'))
+        );
+    }
 }
