@@ -16,6 +16,13 @@
             "Nbj\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nbj\\Cockroach\\CockroachServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
