@@ -3,7 +3,7 @@
     "description": "CockroachDB driver for Laravel 5.4",
     "keywords": ["cockroach", "cockroachdb", "laravel"],
     "type": "package",
-    "license": "GNU",
+    "license": "MIT",
     "authors": [
         {
             "name": "Nikolaj Boel Jensen",

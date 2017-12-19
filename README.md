@@ -1,5 +1,5 @@
 # cockroachdb-laravel
-CockroachDB database driver for Laravel 5.4
+CockroachDB database driver for Laravel 5
 
 ## Usage
 
@@ -9,7 +9,7 @@ CockroachDB database driver for Laravel 5.4
 composer require nbj/cockroachdb-laravel
 ```
 
-### Step 2: Add the Service Provider
+### Step 2: Add the Service Provider (This happens automatically in Laravel 5.5) 
 
 Open `config/app.php` and, to your "providers" array, add:
 
