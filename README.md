@@ -38,3 +38,17 @@ Open `config/datbase.php` and, to your "connections" array, add:
 
 Make sure to update **host**, **port**, **database**, **username**, **password** and **schema** to
 your configuration. Note the **database** and **schema** fields should be the same.
+
+## CockroachDB 2.0.0
+
+Changes made to CockroachDB handles schemas slightly
+different when using the PHP Postgres driver. So instead of using:
+```
+'schema' => 'DATABASE-NAME'
+```
+We need to use the Postgres default of `public` so change your config
+to:
+```
+'schema' => 'public'
+```
+And everything should work as expected.
