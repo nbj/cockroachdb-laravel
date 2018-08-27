@@ -33,11 +33,18 @@ Open `config/datbase.php` and, to your "connections" array, add:
     'prefix' => '',
     'schema' => 'DATABASE-NAME',
     'sslmode' => 'prefer',
+    'sslcert' => env('DB_SSLCERT', '/root/client.root.crt'),
+    'sslkey' => env('DB_SSLKEY', '/root/client.root.key'),
+    'sslrootcert' => env('DB_SSLROOTCERT', '/root/ca.crt'),
 ],
 ```
 
 Make sure to update **host**, **port**, **database**, **username**, **password** and **schema** to
 your configuration. Note the **database** and **schema** fields should be the same.
+
+## Secure Mode
+
+Update **sslcert**, **sslkey** and **sslrootcert** with your path configuration.
 
 ## CockroachDB 2
 
