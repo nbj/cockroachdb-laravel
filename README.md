@@ -33,9 +33,12 @@ Open `config/datbase.php` and, to your "connections" array, add:
     'prefix' => '',
     'schema' => 'DATABASE-NAME',
     'sslmode' => 'prefer',
-    'sslcert' => env('DB_SSLCERT', '/root/client.root.crt'),
-    'sslkey' => env('DB_SSLKEY', '/root/client.root.key'),
-    'sslrootcert' => env('DB_SSLROOTCERT', '/root/ca.crt'),
+    
+    // Only set these keys if you want to run en secure mode
+    // otherwise you can them out of the configuration array
+    'sslcert' => env('DB_SSLCERT', 'client.crt'),
+    'sslkey' => env('DB_SSLKEY', 'client.key'),
+    'sslrootcert' => env('DB_SSLROOTCERT', 'ca.crt'),
 ],
 ```
 
@@ -59,3 +62,59 @@ to:
 'schema' => 'public'
 ```
 And everything should work as expected.
+
+## Usage without laravel
+It is entirely possible to use this driver without the entire Laravel framework.
+Laravel's database components are neatly packaged in its own composer package
+called `illuminate/database` Simply require this package into your project, and
+you are ready to go.
+```
+composer require illuminate/database
+composer require nbj/cockroachdb-laravel
+```
+
+To set up a database connection you need to create a new `Capsule` and register it.
+```php
+<?php
+
+use Illuminate\Database\Connection;
+use Nbj\Cockroach\CockroachConnector;
+use Nbj\Cockroach\CockroachConnection;
+use Illuminate\Database\Capsule\Manager as DB;
+
+$config = [
+    // Your configuration goes here
+];
+
+// Add connection resolver for the cockroach driver
+Connection::resolverFor('cockroach', function ($connection, $database, $prefix, $config) {
+    $connection = (new CockroachConnector)->connect($config);
+
+    return new CockroachConnection($connection, $database, $prefix, $config);
+});
+
+// Create a new DatabaseManager instance
+$db = new DB;
+
+// Add a connection using your configuration
+$db->addConnection($config);
+
+// Register the DatabaseManager instance as global
+$db->setAsGlobal();
+```
+
+It is even possible to use Eloquent (Laravel's ORM) if you choose to. Simply add:
+```php
+$capsule->bootEloquent();
+```
+
+By this point you are able to use the globally registered DatabaseManager like this:
+```php
+<?php
+
+use Illuminate\Database\Capsule\Manager as DB;
+
+// Fetch all users from the users table
+$users = DB::table('users')->get();
+```
+
