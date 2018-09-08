@@ -212,8 +212,9 @@ class CockroachGrammar extends Grammar
     public function compileDropUnique(Blueprint $blueprint, Fluent $command)
     {
         $index = $this->wrap($command->index);
+        $table = $this->wrapTable($blueprint);
 
-        return "alter table {$this->wrapTable($blueprint)} drop constraint {$index}";
+        return "drop index {$table}@{$index} cascade";
     }
 
     /**
