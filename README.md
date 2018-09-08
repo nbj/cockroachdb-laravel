@@ -82,6 +82,8 @@ use Nbj\Cockroach\CockroachConnector;
 use Nbj\Cockroach\CockroachConnection;
 use Illuminate\Database\Capsule\Manager as DB;
 
+require 'vendor/autoload.php';
+
 $config = [
     // Your configuration goes here
 ];
@@ -113,6 +115,8 @@ By this point you are able to use the globally registered DatabaseManager like t
 <?php
 
 use Illuminate\Database\Capsule\Manager as DB;
+
+require 'vendor/autoload.php';
 
 // Fetch all users from the users table
 $users = DB::table('users')->get();
