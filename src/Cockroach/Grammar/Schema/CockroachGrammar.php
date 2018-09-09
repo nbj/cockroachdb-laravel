@@ -20,7 +20,7 @@ class CockroachGrammar extends Grammar
      *
      * @var array
      */
-    protected $modifiers = ['Increment', 'Nullable', 'Default'];
+    protected $modifiers = ['Increment', 'Nullable', 'Default', 'Primary'];
 
     /**
      * The columns available as serials.
@@ -28,6 +28,37 @@ class CockroachGrammar extends Grammar
      * @var array
      */
     protected $serials = ['bigInteger', 'integer', 'mediumInteger', 'smallInteger', 'tinyInteger'];
+
+    /**
+     * Holds all the primary key fields
+     *
+     * @var array
+     */
+    protected $primaryKeyFields = [];
+
+    /**
+     * Gets the primary key string for table creation
+     *
+     * @return string
+     */
+    protected function getPrimaryKeyFields()
+    {
+        $columns = collect($this->primaryKeyFields);
+
+        // Return an empty string if no column is set as primary key
+        if ($columns->count() == 0) {
+            return '';
+        }
+
+        $columns = $columns
+            ->map(function ($column) {
+                return $this->wrap($column->name);
+            })
+            ->unique()
+            ->implode(',');
+
+        return sprintf(', primary key (%s)', $columns);
+    }
 
     /**
      * Compile the query to determine if a table exists.
@@ -59,10 +90,11 @@ class CockroachGrammar extends Grammar
      */
     public function compileCreate(Blueprint $blueprint, Fluent $command)
     {
-        return sprintf('%s table %s (%s)',
+        return sprintf('%s table %s (%s%s)',
             $blueprint->temporary ? 'create temporary' : 'create',
             $this->wrapTable($blueprint),
-            implode(', ', $this->getColumns($blueprint))
+            implode(', ', $this->getColumns($blueprint)),
+            $this->getPrimaryKeyFields()
         );
     }
 
@@ -90,9 +122,9 @@ class CockroachGrammar extends Grammar
      */
     public function compilePrimary(Blueprint $blueprint, Fluent $command)
     {
-        $columns = $this->columnize($command->columns);
+        //$columns = $this->columnize($command->columns);
 
-        return 'alter table '.$this->wrapTable($blueprint)." add primary key ({$columns})";
+        //return 'alter table '.$this->wrapTable($blueprint)." add primary key ({$columns})";
     }
 
     /**
@@ -644,7 +676,29 @@ class CockroachGrammar extends Grammar
     protected function modifyIncrement(Blueprint $blueprint, Fluent $column)
     {
         if (in_array($column->type, $this->serials) && $column->autoIncrement) {
-            return ' primary key';
+            $this->primaryKeyFields[] = $column;
+        }
+    }
+
+    /**
+     * Get the SQL for an primary key column modifier.
+     *
+     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \Illuminate\Support\Fluent  $column
+     * @return null
+     */
+    protected function modifyPrimary(Blueprint $blueprint, Fluent $column)
+    {
+        $primaryCommand = collect($blueprint->getCommands())->first(function ($command) {
+            return $command->name == 'primary';
+        });
+
+        if (!$primaryCommand) {
+            return null;
+        }
+
+        if (in_array($column->type, $this->serials) && in_array($column->name, $primaryCommand->columns)) {
+            $this->primaryKeyFields[] = $column;
         }
     }
 }
