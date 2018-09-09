@@ -39,15 +39,15 @@ class CockroachGrammar extends Grammar
     /**
      * Gets the primary key string for table creation
      *
-     * @return string
+     * @return string|null
      */
     protected function getPrimaryKeyFields()
     {
         $columns = collect($this->primaryKeyFields);
 
-        // Return an empty string if no column is set as primary key
+        // Return null if no column is set as primary key
         if ($columns->count() == 0) {
-            return '';
+            return null;
         }
 
         $columns = $columns
