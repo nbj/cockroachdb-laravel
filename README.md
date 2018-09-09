@@ -107,7 +107,7 @@ $db->setAsGlobal();
 
 It is even possible to use Eloquent (Laravel's ORM) if you choose to. Simply add:
 ```php
-$capsule->bootEloquent();
+$db->bootEloquent();
 ```
 
 By this point you are able to use the globally registered DatabaseManager like this:
