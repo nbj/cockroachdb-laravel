@@ -10,7 +10,9 @@
             "email": "nbj@cego.dk"
         }
     ],
-    "require": {},
+    "require": {
+        "doctrine/dbal": "^2.9"
+    },
     "autoload": {
         "psr-4": {
             "Nbj\\": "src/"
