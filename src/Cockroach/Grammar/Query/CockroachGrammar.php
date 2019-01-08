@@ -2,10 +2,10 @@
 
 namespace Nbj\Cockroach\Grammar\Query;
 
-use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\Grammars\Grammar;
 
 class CockroachGrammar extends Grammar
 {
@@ -294,5 +294,27 @@ class CockroachGrammar extends Grammar
         return array_map(function ($attribute) {
             return "'$attribute'";
         }, $path);
+    }
+
+    /**
+     * Compile the SQL statement to define a savepoint.
+     *
+     * @param  string  $name
+     * @return string
+     */
+    public function compileSavepoint($name)
+    {
+        return 'SAVEPOINT cockroach_restart';
+    }
+
+    /**
+     * Compile the SQL statement to execute a savepoint rollback.
+     *
+     * @param  string  $name
+     * @return string
+     */
+    public function compileSavepointRollBack($name)
+    {
+        return 'ROLLBACK TO SAVEPOINT cockroach_restarts';
     }
 }
