@@ -297,24 +297,12 @@ class CockroachGrammar extends Grammar
     }
 
     /**
-     * Compile the SQL statement to define a savepoint.
+     * Determine if the grammar supports savepoints.
      *
-     * @param  string  $name
-     * @return string
+     * @return bool
      */
-    public function compileSavepoint($name)
+    public function supportsSavepoints()
     {
-        return 'SAVEPOINT cockroach_restart';
-    }
-
-    /**
-     * Compile the SQL statement to execute a savepoint rollback.
-     *
-     * @param  string  $name
-     * @return string
-     */
-    public function compileSavepointRollBack($name)
-    {
-        return 'ROLLBACK TO SAVEPOINT cockroach_restarts';
+        return false;
     }
 }
