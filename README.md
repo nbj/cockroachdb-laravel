@@ -63,6 +63,10 @@ to:
 ```
 And everything should work as expected.
 
+## Known issues
+- Constraints cannot be in the same migration as the creation of a table. The workaround is to add your constraints to its own migration after the table
+  has been created.
+
 ## Usage without laravel
 It is entirely possible to use this driver without the entire Laravel framework.
 Laravel's database components are neatly packaged in its own composer package
