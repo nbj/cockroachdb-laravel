@@ -1,6 +1,6 @@
 {
     "name": "nbj/cockroachdb-laravel",
-    "description": "CockroachDB driver for Laravel 5.6",
+    "description": "CockroachDB driver for Laravel 8",
     "keywords": ["cockroach", "cockroachdb", "laravel"],
     "type": "package",
     "license": "MIT",
