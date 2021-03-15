@@ -119,12 +119,13 @@ class CockroachGrammar extends Grammar
     }
 
     /**
-     * Compile the columns for the update statement.
+     * Compile the columns for an update statement.
      *
-     * @param  array   $values
+     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  array  $values
      * @return string
      */
-    protected function compileUpdateColumns($values)
+    protected function compileUpdateColumns(Builder $query, array $values)
     {
         // When gathering the columns for an update statement, we'll wrap each of the
         // columns and convert it to a parameter value. Then we will concatenate a
