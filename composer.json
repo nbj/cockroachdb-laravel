@@ -10,7 +10,6 @@
             "email": "nbj@cego.dk"
         }
     ],
-    "require": {},
     "autoload": {
         "psr-4": {
             "Nbj\\": "src/"
@@ -24,5 +23,9 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require-dev": {
+        "illuminate/database": "^8.32",
+        "illuminate/support": "^8.32"
+    }
 }
